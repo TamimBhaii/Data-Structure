@@ -16,38 +16,38 @@ class Node
 void insert_tail(Node *&head, Node *&tail, int val)
 {
     Node *newNode = new Node(val);
-    if(tail == NULL)
+    if(tail == NULL) //jode head shonno hoy, mane first insert kora value tai hobe head & tail...
     {
         head = newNode;
         tail = newNode;
         return;
     }
-    tail->next = newNode;
-    tail = tail->next;
+    tail->next = newNode; // value tail ee insert korar por purber tail er sathe new add kora tail er connection
+    tail = tail->next; // akhon notun tail holo ager tail er next value ta mane jeta add korlam
 }
 
 void print_normal(Node *head)
 {
-    Node *temp = head;
-    while(temp!=NULL)
+    Node *temp = head; // akhane temp er moddhei head k rekhe delam jeno pore chaile head k aber access korte pare, head jeno hariye na jai...
+    while(temp!=NULL) // loop NULL porjonto chole off hoye jabe
     {
-        cout << temp->val << " ";
-        temp = temp->next;
+        cout << temp->val << " "; // temp er value print korbe & space print korbe
+        temp = temp->next; // temp er j value ta print kora hole notun temp hobe next index, then aber temp er value print korbe, ai vabei cholte cholte aksomoy NULL pele loop break korbe
     }
     cout << endl;
 }
 int main()
 {
-    Node *head = NULL;
-    Node *tail = NULL;
+    Node *head = NULL; // initial obostai head NULL thakbe
+    Node *tail = NULL; // initial obostai tail NULL thakbe
     int val;
     while(true)
     {
         cin >> val;
-        if(val==-1) break;
-        insert_tail(head, tail, val);
+        if(val==-1) break; // user value -1 dele, -1 dewar ag porjont value gulo neye kaj korbe
+        insert_tail(head, tail, val); // insert function head, tail, value er maan pass korcha
     }
-    print_normal(head);
+    print_normal(head); printing function, singly linked list er value head theke print hobe tai head ta pass kora hoise
     
     return 0;
 }
