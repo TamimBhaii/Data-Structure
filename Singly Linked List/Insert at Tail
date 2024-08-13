@@ -1,54 +1,58 @@
-#include<bits/stdc++.h> 
+#include<bits/stdc++.h>
 using namespace std;
 class Node
 {
     public:
         int val;
         Node *next;
-
         Node(int val)
         {
             this->val = val;
             this->next = NULL;
         }
 };
-
-void insert_tail(Node *&head, Node *&tail, int val)
+void insert_tail(Node *&head, int val)
 {
     Node *newNode = new Node(val);
-    if(tail == NULL) //jode head shonno hoy, mane first insert kora value tai hobe head & tail...
+    if(head == NULL)
     {
         head = newNode;
-        tail = newNode;
         return;
     }
-    tail->next = newNode; // value tail ee insert korar por purber tail er sathe new add kora tail er connection
-    tail = tail->next; // akhon notun tail holo ager tail er next value ta mane jeta add korlam
-}
 
-void print_normal(Node *head)
-{
-    Node *temp = head; // akhane temp er moddhei head k rekhe delam jeno pore chaile head k aber access korte pare, head jeno hariye na jai...
-    while(temp!=NULL) // loop NULL porjonto chole off hoye jabe
+    Node *temp = head;
+    while(temp->next!=NULL)
     {
-        cout << temp->val << " "; // temp er value print korbe & space print korbe
-        temp = temp->next; // temp er j value ta print kora hole notun temp hobe next index, then aber temp er value print korbe, ai vabei cholte cholte aksomoy NULL pele loop break korbe
+        temp = temp->next;
+    }
+    temp->next = newNode;
+
+}
+void print_linked_list(Node *head)
+{
+    Node *temp = head;
+    while(temp!=NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->next;
     }
     cout << endl;
 }
 int main()
 {
-    Node *head = NULL; // initial obostai head NULL thakbe
-    Node *tail = NULL; // initial obostai tail NULL thakbe
+    Node *head = NULL;
+
     int val;
+    cout << "Enter the value: ";
     while(true)
     {
         cin >> val;
-        if(val==-1) break; // user value -1 dele, -1 dewar ag porjont value gulo neye kaj korbe
-        insert_tail(head, tail, val); // insert function head, tail, value er maan pass korcha
+        if(val == -1)
+            break;
+        insert_tail(head, val);
+
     }
-    print_normal(head); printing function, singly linked list er value head theke print hobe tai head ta pass kora hoise
+    print_linked_list(head);
     
     return 0;
 }
-
