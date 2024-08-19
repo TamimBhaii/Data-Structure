@@ -1,0 +1,93 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+public:
+    int val;
+    Node *next;
+    Node *prev;
+    Node(int val)
+    {
+        this->val = val;
+        this->next = NULL;
+        this->prev = NULL;
+    }
+};
+void insert_head(Node *&head, Node *&tail, int v)
+{
+    Node *newNode = new Node(v);
+    if (head == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
+}
+void insert_any_position(Node *&head, Node *&tail, int pos, int v)
+{
+    if (pos == 0)
+    {
+        insert_head(head, tail, v);
+        return;
+    }
+    Node *newNode = new Node(v);
+    Node *temp = head;
+
+    for (int i = 0; i < pos - 1; i++)
+    {
+        temp = temp->next;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+    newNode->next->prev = newNode;
+    newNode->prev = temp;
+}
+
+void insert_tail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val);
+    if (head == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = tail->next;
+}
+void print_linkedList(Node *head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main()
+{
+    Node *head = NULL;
+    Node *tail = NULL;
+
+    int val;
+    cout << "Enter the value: ";
+    while (true)
+    {
+        cin >> val;
+        if (val == -1)
+            break;
+        insert_tail(head, tail, val);
+    }
+    int pos, v;
+    cout << "Enter the pos and value: ";
+    cin >> pos >> v;
+    insert_any_position(head, tail, pos, v);
+    print_linkedList(head);
+    return 0;
+}
