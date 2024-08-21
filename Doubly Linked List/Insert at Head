@@ -65,7 +65,7 @@ int main()
             break;
         insert_tail(head, tail, val);
     }
-    int pos, v;
+    int v;
     cout << "Enter the value of head: ";
     cin >> v;
     insert_head(head, tail, v);
