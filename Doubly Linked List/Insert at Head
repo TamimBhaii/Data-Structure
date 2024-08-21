@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+public:
+    int val;
+    Node *next;
+    Node *prev;
+    Node(int val)
+    {
+        this->val = val;
+        this->next = NULL;
+        this->prev = NULL;
+    }
+};
+void insert_head(Node *&head, Node *&tail, int v)
+{
+    Node *newNode = new Node(v);
+    if (head == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
+}
+
+void insert_tail(Node *&head, Node *&tail, int val)
+{
+    Node *newNode = new Node(val);
+    if (head == NULL)
+    {
+        head = newNode;
+        tail = newNode;
+        return;
+    }
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = tail->next;
+}
+void print_linkedList(Node *head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->val << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main()
+{
+    Node *head = NULL;
+    Node *tail = NULL;
+
+    int val;
+    cout << "Enter the value: ";
+    while (true)
+    {
+        cin >> val;
+        if (val == -1)
+            break;
+        insert_tail(head, tail, val);
+    }
+    int pos, v;
+    cout << "Enter the value of head: ";
+    cin >> v;
+    insert_head(head, tail, v);
+    print_linkedList(head);
+    return 0;
+}
